@@ -3,13 +3,16 @@ int moisture1 = A0;
 int moisture2 = A1;
 int moisture3 = A2;
 int moisture4 = A3;
-
+int moisture5 = A4;
+int moisture6 = A5;
 
 // declare moisture values
 int moisture1_value = 0;
 int moisture2_value = 0;
 int moisture3_value = 0;
 int moisture4_value = 0;
+int moisture5_value = 0;
+int moisture6_value = 0;
 
 // set water relays
 int relay1 = 3;
@@ -21,6 +24,7 @@ int relay4 = 6;
 int pump = 2;
 
 void setup() {
+ 
   // declare relay as output
   pinMode(relay1, OUTPUT);
   pinMode(relay2, OUTPUT);
@@ -33,12 +37,14 @@ void setup() {
 }
 
 void loop() {
-  
+   
  // read the value from the moisture sensors:
  moisture1_value = analogRead(moisture1);
  moisture2_value = analogRead(moisture2);
  moisture3_value = analogRead(moisture3);
  moisture4_value = analogRead(moisture4);
+ moisture5_value = analogRead(moisture5);
+ moisture6_value = analogRead(moisture6);
  
  // text " " in front of moisture_value
  Serial.print ("Value 1:  ");
@@ -50,6 +56,10 @@ void loop() {
  Serial.println(moisture3_value);
  Serial.print ("Value 4:  ");
  Serial.println(moisture4_value);
+ Serial.print ("Value 5:  ");
+ Serial.println(moisture5_value);
+ Serial.print ("Value 6:  ");
+ Serial.println(moisture6_value);
  // text to devide read-outs
  Serial.println ("END");
  
@@ -86,8 +96,8 @@ void loop() {
  digitalWrite(relay2, LOW);
  digitalWrite(relay3, LOW);
  digitalWrite(relay4, LOW);
- 
+  
  // wait 5 minutes and repeat the process
  delay(300000);
- 
+
 }
