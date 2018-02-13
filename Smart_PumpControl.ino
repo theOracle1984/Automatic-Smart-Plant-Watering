@@ -38,32 +38,35 @@ void setup() {
 
 void loop() {
    
- // read the value from the moisture sensors:
+ // read the value from the moisture sensors AND Sensor output to Serial Monitor // text " " in front of moisture_value
  moisture1_value = analogRead(moisture1);
- moisture2_value = analogRead(moisture2);
- moisture3_value = analogRead(moisture3);
- moisture4_value = analogRead(moisture4);
- moisture5_value = analogRead(moisture5);
- moisture6_value = analogRead(moisture6);
- 
- // text " " in front of moisture_value
  Serial.print ("Value 1:  ");
- // Sensor output
  Serial.println(moisture1_value);
+ delay(5000);
+ moisture2_value = analogRead(moisture2);
  Serial.print ("Value 2:  ");
  Serial.println(moisture2_value);
+ delay(5000);
+ moisture3_value = analogRead(moisture3);
  Serial.print ("Value 3:  ");
  Serial.println(moisture3_value);
+ delay(5000);
+ moisture4_value = analogRead(moisture4);
  Serial.print ("Value 4:  ");
  Serial.println(moisture4_value);
+ delay(5000);
+ moisture5_value = analogRead(moisture5);
  Serial.print ("Value 5:  ");
  Serial.println(moisture5_value);
+ delay(5000);
+ moisture6_value = analogRead(moisture6);
  Serial.print ("Value 6:  ");
  Serial.println(moisture6_value);
  // text to devide read-outs
  Serial.println ("END");
  
- // check which plant need water
+ 
+// check which plant need water
  // and open the switch for that specific plant
  
  if(moisture1_value<=450){
@@ -86,7 +89,7 @@ void loop() {
  }
  
  // let it water the plant for 5 seconds
- delay(5000);
+ delay(50 00);
  
  // turn the pump off
  digitalWrite(pump, LOW);
