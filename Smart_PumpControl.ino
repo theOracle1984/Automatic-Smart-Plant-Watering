@@ -1,3 +1,19 @@
+// set all moisture sensors PIN ID
+int moisture1 = A0;
+int moisture2 = A1;
+int moisture3 = A2;
+int moisture4 = A3;
+int moisture5 = A4;
+int moisture6 = A5;
+
+// declare moisture values
+int moisture1_value = 0;
+int moisture2_value = 0;
+int moisture3_value = 0;
+int moisture4_value = 0;
+int moisture5_value = 0;
+int moisture6_value = 0;
+
 // set water relays
 int relay1 = 3;
 int relay2 = 4;
@@ -8,6 +24,7 @@ int relay4 = 6;
 int pump = 2;
 
 void setup() {
+ 
   // declare relay as output
   pinMode(relay1, OUTPUT);
   pinMode(relay2, OUTPUT);
@@ -16,57 +33,74 @@ void setup() {
   // declare pump as output
   pinMode(pump, OUTPUT);
   // declare the ledPin as an OUTPUT:
-  Serial.begin(9600); 
-
+  Serial.begin(9600);  
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-  int command = Serial.read();
-
-  if (command == '1') {//relay 1 aan
+   
+ // read the value from the moisture sensors AND Sensor output to Serial Monitor // text " " in front of moisture_value
+ moisture1_value = analogRead(moisture1);
+ Serial.print ("Value 1:  ");
+ Serial.println(moisture1_value);
+ delay(5000);
+ moisture2_value = analogRead(moisture2);
+ Serial.print ("Value 2:  ");
+ Serial.println(moisture2_value);
+ delay(5000);
+ moisture3_value = analogRead(moisture3);
+ Serial.print ("Value 3:  ");
+ Serial.println(moisture3_value);
+ delay(5000);
+ moisture4_value = analogRead(moisture4);
+ Serial.print ("Value 4:  ");
+ Serial.println(moisture4_value);
+ delay(5000);
+ moisture5_value = analogRead(moisture5);
+ Serial.print ("Value 5:  ");
+ Serial.println(moisture5_value);
+ delay(5000);
+ moisture6_value = analogRead(moisture6);
+ Serial.print ("Value 6:  ");
+ Serial.println(moisture6_value);
+ // text to devide read-outs
+ Serial.println ("END");
+ 
+ 
+// check which plant need water
+ // and open the switch for that specific plant
+ 
+ if(moisture1_value<=450){
   digitalWrite(relay1, HIGH);
-  Serial.println( "1=ON" );}
-else {//relay 1 uit
-digitalWrite(relay1, LOW);
-}
-  
-  if (command == '2') {//relay 2 aan
+ }
+ if(moisture2_value<=450){
   digitalWrite(relay2, HIGH);
-  Serial.println( "2=ON" );}
- else {//relay 2 uit
- //relay 2 uit
-digitalWrite(relay2, LOW);   
-}
-
-  if (command == '3') {//relay 3 aan
+ }
+ if(moisture3_value<=450){
   digitalWrite(relay3, HIGH);
-  Serial.println( "3=ON" );}
-  else {//relay 3 uit
-digitalWrite(relay3, LOW);
-  }
-
-  if (command == '4') {//relay 4 aan
+ }
+ if(moisture4_value<=450){
   digitalWrite(relay4, HIGH);
-  Serial.println( "4=ON" );}
-  else {//relay 4 uit
-digitalWrite(relay4, LOW);
-  }
+ }
+ 
+ // make sure there is at least one plant that needs water
+ // if there is, open the motor
+ if(moisture1_value<=450 || moisture2_value<=450 || moisture3_value<=450 || moisture4_value<=450){
+   digitalWrite(pump, HIGH);
+ }
+ 
+ // let it water the plant for 5 seconds
+ delay(50 00);
+ 
+ // turn the pump off
+ digitalWrite(pump, LOW);
+ 
+ // go each switch and turn them off
+ digitalWrite(relay1, LOW);
+ digitalWrite(relay2, LOW);
+ digitalWrite(relay3, LOW);
+ digitalWrite(relay4, LOW);
   
-if (command == '9') {//pomp aan 
-  digitalWrite(pump, HIGH);}
-else {//pump uit
-  digitalWrite(pump, LOW);
+ // wait 5 minutes and repeat the process
+ delay(300000);
+
 }
-  }
-  }
-  
-  
-  
-
-
-  
-
-
-  
-  
